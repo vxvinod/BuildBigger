@@ -12,9 +12,15 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-class EndpointAsyncTask extends AsyncTask<Context, Void, String> {
+public class EndpointAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private OnRequestFinish onRequestFinish;
+
+
+    public EndpointAsyncTask(OnRequestFinish onRequestFinish) {
+        this.onRequestFinish = onRequestFinish;
+    }
 
     @Override
     protected String doInBackground(Context... params) {
@@ -56,5 +62,13 @@ class EndpointAsyncTask extends AsyncTask<Context, Void, String> {
         context.startActivity(intent);
 */
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        if(result != null){
+            onRequestFinish.onFinish(result);
+        }
+
+    }
+
+    public interface OnRequestFinish {
+        void onFinish(String s);
     }
 }
