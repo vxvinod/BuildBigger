@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("Outside", "Outside MainActivity Fragment");
         View root = inflater.inflate(R.layout.fragment_main_activity, container, false);
         Button jokeButton = (Button) root.findViewById(R.id.tellJokeButton);
         progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
