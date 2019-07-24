@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 //        intent.putExtra("joke", fetchJoke);
 //        startActivity(intent);
         //Toast.makeText(this, fetchJoke, Toast.LENGTH_SHORT).show();
-        new EndpointAsyncTask().execute(this);
+     //   new EndpointAsyncTask().execute(this);
     }
 
 

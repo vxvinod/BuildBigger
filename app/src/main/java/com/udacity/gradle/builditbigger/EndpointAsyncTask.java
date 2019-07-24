@@ -1,9 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.jokeandroidlib.JokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -15,6 +18,12 @@ import java.io.IOException;
 class EndpointAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private OnRequestFinish onRequestFinish;
+    private com.udacity.gradle.builditbigger.MainActivityFragment mainActivityFragment;
+
+    public EndpointAsyncTask() {
+
+    }
 
     @Override
     protected String doInBackground(Context... params) {
@@ -47,6 +56,8 @@ class EndpointAsyncTask extends AsyncTask<Context, Void, String> {
         }
     }
 
+
+
     @Override
     protected void onPostExecute(String result) {
         /*// Create Intent to launch JokeFactory Activity
@@ -55,6 +66,17 @@ class EndpointAsyncTask extends AsyncTask<Context, Void, String> {
         intent.putExtra(DisplayJokeActivity.JOKE_KEY,result);
         context.startActivity(intent);
 */
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Log.d("postExecute", result);
+//        mainActivityFragment.loadJoke = result;
+//        mainActivityFragment.launchDisplayJokeActivity();
+        Intent intent = new Intent(context, JokeActivity.class);
+        intent.putExtra("joke", result);
+        //Toast.makeText(context, loadedJoke, Toast.LENGTH_LONG).show();
+        context.startActivity(intent);
+    }
+
+    public interface OnRequestFinish {
+        void onFinish(String s);
     }
 }
